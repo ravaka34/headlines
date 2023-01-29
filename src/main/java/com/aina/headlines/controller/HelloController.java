@@ -13,4 +13,11 @@ public class HelloController {
         model.setViewName("hello");
         return model;
     }
+
+    @GetMapping("/example")
+    public ModelAndView example(){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("example");
+        return model;
+    }
 }
