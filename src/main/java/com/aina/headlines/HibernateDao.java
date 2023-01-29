@@ -40,7 +40,7 @@ public class HibernateDao {
 
     public <T> List<T> findWhere(T entity){
         Session session = sessionFactory.openSession();
-        Example example = Example.create(entity).ignoreCase();
+        Example example = Example.create(entity);
         List<T> results = session.createCriteria(entity.getClass()).add(example).list();
         session.close();
         return results;

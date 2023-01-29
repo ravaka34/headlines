@@ -4,7 +4,7 @@ CREATE TABLE headline (
     title varchar(250) not null ,
     picture VARCHAR(250) NOT NULL,
     date1 DATE NOT NULL,
-    date2 DATE NOT NULL,
+    date2 DATE ,
     place varchar(250) not null,
     body text not null
 );
@@ -22,3 +22,7 @@ CREATE TABLE headline_type (
 
 ALTER TABLE headline ADD FOREIGN KEY (headline_type_id) REFERENCES
 headline_type(id);
+
+INSERT INTO login (email, mdp) VALUES ('johndoe@gmail.com', 'john');
+
+INSERT INTO headline_type (name) values ('Event'),('Article');
