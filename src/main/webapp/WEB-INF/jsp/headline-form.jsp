@@ -12,16 +12,14 @@
 <%
   List<HeadlineType> types = (List<HeadlineType>) request.getAttribute("types");
 %>
-<%@ include file="header.jsp" %>
+<%@ include file="bo-header.jsp" %>
   <div class="container">
     <h3>Create headline</h3>
     <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">Headline</h3>
           </div>
-          <!-- /.card-header -->
-          <!-- form start -->
-          <form>
+          <form action="${pageContext.request.contextPath}/headline" method="post" enctype="multipart/form-data" >
             <div class="card-body">
               <div class="form-group">
                 <label for="title">Title</label>
@@ -39,7 +37,7 @@
                 <label for="picture">Picture</label>
                 <div class="input-group">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="picture">
+                    <input type="file" name="file" class="custom-file-input" id="picture">
                     <label class="custom-file-label" for="picture">Choose file</label>
                   </div>
                   <div class="input-group-append">
@@ -53,7 +51,7 @@
               </div>
               <div class="form-group">
                 <label for="date2">Date 2</label>
-                <input type="date" class="form-control" name="date2" id="date2" required>
+                <input type="date" class="form-control" name="date2" id="date2">
               </div>
               <div class="form-group">
                 <label for="place">Place</label>

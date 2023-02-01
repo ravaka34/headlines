@@ -29,7 +29,7 @@ public class LoginController {
        try{
             service.login(login);
             session.setAttribute("login", "true");
-            return "redirect:/home";
+            return "redirect:/bo/home";
         }catch (LoginNotFound e){
             model.addAttribute("error", e.getMessage());
             return loginForm(model);

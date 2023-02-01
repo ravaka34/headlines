@@ -4,8 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Order;
+import org.hibernate.criterion.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -75,6 +74,39 @@ public class HibernateDao {
                 .setMaxResults(offset+size) .list();
         session.close();
         return results;
+    }
+
+    public <T> List<T> personalFind (Class<T> clazz, int offset, int size, String word){
+        Session session = sessionFactory.openSession();
+        word = "%"+word+"%";
+        List<T> results = session.createCriteria(clazz)
+                .add(
+                        Restrictions.or(
+                                Restrictions.ilike("title", word, MatchMode.ANYWHERE),
+                                Restrictions.ilike("body", word, MatchMode.ANYWHERE)
+                        )
+                )
+                .addOrder(Order.asc("id"))
+                .setFirstResult(offset)
+                .setMaxResults(offset + size)
+                .list();
+        session.close();
+        return results;
+    }
+
+    public Long personalCount (Class clazz, String word){
+        Session session = sessionFactory.openSession();
+        long count = (Long) session.createCriteria(clazz)
+                .setProjection(Projections.rowCount())
+                .add(
+                    Restrictions.or(
+                            Restrictions.ilike("title", word, MatchMode.ANYWHERE),
+                            Restrictions.ilike("body", word, MatchMode.ANYWHERE)
+                    )
+                )
+                .uniqueResult();
+        session.close();
+        return count;
     }
 
     public void deleteById(Class tClass, Serializable id){

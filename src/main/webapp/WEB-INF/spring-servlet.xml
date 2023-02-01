@@ -18,6 +18,10 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
     <mvc:resources mapping="/resources/theme/**" location="/resources/theme/" cache-period="31556926" />
+    <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926" />
     <mvc:annotation-driven/>
 </beans>
