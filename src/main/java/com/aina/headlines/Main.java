@@ -13,7 +13,8 @@ public class Main {
         HibernateDao dao = context.getBean(HibernateDao.class);
         System.out.println(dao);
 
-        List<Headline> headlines = dao.personalFind(Headline.class, 6, 6, "");
-        System.out.println(headlines.get(1).getId());
+
+        List<Headline> headlines = dao.personalFind(new Headline(), 6, 6, "ma");
+        System.out.println(headlines.size());
     }
 }

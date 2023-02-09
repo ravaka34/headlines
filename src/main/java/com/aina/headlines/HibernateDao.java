@@ -94,6 +94,44 @@ public class HibernateDao {
         return results;
     }
 
+    public <T> List<T> personalFind (T entity, int offset, int size, String word){
+        Session session = sessionFactory.openSession();
+        word = "%"+word+"%";
+        Example example = Example.create(entity);
+        List<T> results = session.createCriteria(entity.getClass())
+                .add(example)
+                .add(
+                        Restrictions.or(
+                                Restrictions.ilike("title", word, MatchMode.ANYWHERE),
+                                Restrictions.ilike("body", word, MatchMode.ANYWHERE)
+                        )
+                )
+                .addOrder(Order.desc("id"))
+                .setFirstResult(offset)
+                .setMaxResults(offset + size)
+                .list();
+        session.close();
+        return results;
+    }
+
+    public <T> Long personalCount (T entity, String word){
+        Session session = sessionFactory.openSession();
+        Example example = Example.create(entity);
+        long count = (Long) session.createCriteria(entity.getClass())
+                .setProjection(Projections.rowCount())
+                .add(example)
+                .add(
+                        Restrictions.or(
+                                Restrictions.ilike("title", word, MatchMode.ANYWHERE),
+                                Restrictions.ilike("body", word, MatchMode.ANYWHERE)
+                        )
+                )
+                .uniqueResult();
+        session.close();
+        return count;
+    }
+
+
     public Long personalCount (Class clazz, String word){
         Session session = sessionFactory.openSession();
         long count = (Long) session.createCriteria(clazz)

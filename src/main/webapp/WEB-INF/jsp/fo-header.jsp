@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Headlines</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -34,7 +34,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="${pageContext.request.contextPath}/bo/home" class="nav-link">Home</a>
+                <a href="${pageContext.request.contextPath}/fo/home" class="nav-link">Home</a>
             </li>
         </ul>
 
@@ -81,7 +81,21 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/fo/headline-form" class="nav-link">
+                            <i class="nav-icon far fa-image"></i>
+                            <p>
+                                Create headline
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/logoutAuteur" class="nav-link">
+                            <p>
+                                Log out
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

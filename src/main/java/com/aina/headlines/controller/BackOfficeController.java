@@ -5,10 +5,7 @@ import com.aina.headlines.service.HeadlineService;
 import com.aina.headlines.service.HeadlineTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -32,17 +29,17 @@ public class BackOfficeController {
             return "redirect:/login";
         }
         headlineService.create(headline, session.getServletContext().getRealPath(UPLOAD_DIRECTORY));
-        return "redirect:/home";
+        return "redirect:/bo/home";
     }
 
     @GetMapping("/bo/search")
-    public ModelAndView search (@RequestParam int page, @RequestParam String word){
+    public ModelAndView search (@RequestParam int page, @RequestParam String word, @RequestParam Integer status){
         ModelAndView model = new ModelAndView();
         int offset = (page-1) * SIZE;
-        model.addObject("headlines", headlineService.search(word, offset, SIZE));
-        model.addObject("totalNumber", headlineService.count(word));
+        model.addObject("headlines", headlineService.search(word, status, offset, SIZE));
+        model.addObject("totalNumber", headlineService.count(word, status));
+        model.addObject("status", status);
         model.addObject("page", page);
-        System.out.println(headlineService.count(word));
         model.setViewName("bo-home");
         return model;
     }
@@ -54,7 +51,7 @@ public class BackOfficeController {
             model.setViewName("redirect:/login");
             return model;
         }
-        return search(1, "");
+        return search(1, "", 0);
     }
 
     @GetMapping("/bo/headline-form")
@@ -66,6 +63,30 @@ public class BackOfficeController {
         }
         model.addObject("types", headlineTypeService.getAll());
         model.setViewName("headline-form");
+        return model;
+    }
+
+    @GetMapping("/headline/{id}/publier")
+    public ModelAndView publishHeadline(@PathVariable Integer id, HttpSession session){
+        ModelAndView model = new ModelAndView();
+        if(session.getAttribute("login") == null ){
+            model.setViewName("redirect:/login");
+            return model;
+        }
+       headlineService.publish(id);
+        model.setViewName("redirect:/bo/home");
+        return model;
+    }
+
+    @PostMapping("/headline/{id}/datePublication")
+    public ModelAndView setDatePublication(@PathVariable Integer id, HttpSession session, Headline headline){
+        ModelAndView model = new ModelAndView();
+        if(session.getAttribute("login") == null ){
+            model.setViewName("redirect:/login");
+            return model;
+        }
+        headlineService.setDatePublication(id, headline.getDatePubHtml());
+        model.setViewName("redirect:/bo/home");
         return model;
     }
 }

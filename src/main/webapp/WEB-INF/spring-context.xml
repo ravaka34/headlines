@@ -5,10 +5,10 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/headlines" />
-        <property name="username" value="headlines" />
-        <property name="password" value="headlines" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/test_cluster" />
+        <property name="username" value="test_cluster" />
+        <property name="password" value="test_cluster" />
     </bean>
 
     <!-- Hibernate 5 Annotation SessionFactory Bean definition-->
@@ -21,8 +21,9 @@
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
+<!--                <prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>

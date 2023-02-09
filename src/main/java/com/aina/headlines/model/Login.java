@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name = "login")
 @Getter
 @Setter
 public class Login extends HasId {

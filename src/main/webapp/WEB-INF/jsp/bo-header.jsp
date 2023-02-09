@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Headlines BO</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -50,6 +50,11 @@
                         <div class="input-group input-group-sm">
                             <input class="form-control form-control-navbar" type="search" name="word" placeholder="Search" aria-label="Search">
                             <input type="hidden" name="page" value="1">
+                            <select name="status">
+                                <option value = "0"> Status </option>
+                                <option value = "1"> Cree </option>
+                                <option value = "2"> Publie </option>
+                            </select>
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
                                     <i class="fas fa-search"></i>
@@ -86,6 +91,13 @@
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Create headline
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/logoutAdmin" class="nav-link">
+                            <p>
+                                Log out
                             </p>
                         </a>
                     </li>

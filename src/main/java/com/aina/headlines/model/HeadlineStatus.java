@@ -1,14 +1,13 @@
 package com.aina.headlines.model;
 
-import com.aina.headlines.model.common.HasId;
 import com.aina.headlines.model.common.HasName;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 
-@Entity(name = "headline_type")
+@Entity(name = "headline_status")
 @Getter
 @Setter
-public class HeadlineType extends HasName {
+public class HeadlineStatus extends HasName {
 }
